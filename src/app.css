@@ -1,0 +1,210 @@
+@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=VT323&family=JetBrains+Mono:wght@400;500;700&family=DM+Serif+Display:ital@0;1&display=swap');
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--font-pixel: 'Silkscreen', 'VT323', ui-monospace, monospace;
+	--font-mono:
+		'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	--font-serif: 'DM Serif Display', ui-serif, Georgia, 'Times New Roman', serif;
+
+	--color-paper: #e8e0cc;
+	--color-paper-deep: #d8ceb3;
+	--color-paper-edge: #b8ab8a;
+	--color-paper-hover: #dfd5be;
+	--color-paper-lite: #f2ecdc;
+
+	--color-ink: #1a1712;
+	--color-ink-2: #3a342a;
+	--color-ink-3: #5a5344;
+	--color-ink-4: #8a7f68;
+
+	--color-accent: #c4411d;
+	--color-accent-hover: #a0351a;
+	--color-accent-soft: #f0c8b5;
+
+	--animate-marquee: roll 38s linear infinite;
+}
+
+@keyframes roll {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-100%);
+	}
+}
+
+/* Dark — "terminal at midnight". Same token names, different values when .dark is set. */
+.dark {
+	--color-paper: #12110e;
+	--color-paper-deep: #0a0908;
+	--color-paper-edge: #3a3528;
+	--color-paper-hover: #1e1c16;
+	--color-paper-lite: #1a1814;
+
+	--color-ink: #e8e0cc;
+	--color-ink-2: #b8ab8a;
+	--color-ink-3: #8a7f68;
+	--color-ink-4: #5a5344;
+
+	--color-accent: #ff6a3d;
+	--color-accent-hover: #ff8f63;
+	--color-accent-soft: #3a1a0e;
+}
+
+@layer base {
+	html {
+		font-family: var(--font-mono);
+		color: var(--color-ink);
+		background: var(--color-paper);
+		image-rendering: pixelated;
+		-webkit-font-smoothing: antialiased;
+		text-rendering: geometricPrecision;
+	}
+	body {
+		background: var(--color-paper);
+		background-image: radial-gradient(circle, var(--color-ink-4) 1px, transparent 1.2px);
+		background-size: 24px 24px;
+	}
+	::selection {
+		background: var(--color-accent);
+		color: var(--color-paper);
+	}
+	mark {
+		background: var(--color-accent-soft);
+		color: var(--color-ink);
+		padding: 0 0.15em;
+	}
+}
+
+/* ---- Hard-edged offset block shadows (the signature) ----------------- */
+@utility shadow-block-xs {
+	box-shadow: 2px 2px 0 var(--color-ink);
+}
+@utility shadow-block-sm {
+	box-shadow: 3px 3px 0 var(--color-ink);
+}
+@utility shadow-block-md {
+	box-shadow: 4px 4px 0 var(--color-ink);
+}
+@utility shadow-block-lg {
+	box-shadow: 5px 5px 0 var(--color-ink);
+}
+@utility shadow-block-xl {
+	box-shadow: 8px 8px 0 var(--color-ink);
+}
+@utility shadow-block-accent {
+	box-shadow: 5px 5px 0 var(--color-accent);
+}
+@utility shadow-block-accent-md {
+	box-shadow: 4px 4px 0 var(--color-accent);
+}
+@utility shadow-block-accent-sm {
+	box-shadow: 2px 2px 0 var(--color-accent);
+}
+@utility shadow-pager {
+	box-shadow: 2px 2px 0 var(--color-ink);
+}
+@utility shadow-letter-btn {
+	box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* ---- Press-down interaction (offset block scoots toward cursor) ------ */
+@utility press-block {
+	transition:
+		transform 100ms steps(2, end),
+		box-shadow 100ms steps(2, end),
+		background 80ms steps(2, end);
+}
+@utility press-block-on {
+	transform: translate(2px, 2px);
+	box-shadow: 1px 1px 0 var(--color-ink) !important;
+}
+
+/* ---- Background patterns -------------------------------------------- */
+@utility bg-grid-paper {
+	background-image: radial-gradient(circle, var(--color-ink-4) 1px, transparent 1.2px);
+	background-size: 24px 24px;
+}
+@utility bg-grid-stats {
+	background-image:
+		linear-gradient(to right, var(--color-ink-4) 1px, transparent 1px),
+		linear-gradient(to bottom, var(--color-ink-4) 1px, transparent 1px);
+	background-size: 24px 24px;
+}
+@utility bg-dot-ink {
+	background-image: radial-gradient(
+		circle,
+		rgba(232, 224, 204, 0.12) 1.2px,
+		transparent 1.4px
+	);
+	background-size: 8px 8px;
+}
+@utility bg-dot-letter {
+	background-image: radial-gradient(circle, rgba(0, 0, 0, 0.18) 1.2px, transparent 1.4px);
+	background-size: 8px 8px;
+}
+
+/* ---- Project thumbnails (six unique textures) ----------------------- */
+@utility thumb-a {
+	background: var(--color-accent);
+	color: var(--color-paper);
+	background-image: radial-gradient(circle, rgba(0, 0, 0, 0.28) 1.2px, transparent 1.4px);
+	background-size: 7px 7px;
+}
+@utility thumb-b {
+	background: var(--color-ink);
+	color: var(--color-paper);
+	background-image:
+		linear-gradient(
+			45deg,
+			rgba(232, 224, 204, 0.18) 25%,
+			transparent 25%,
+			transparent 75%,
+			rgba(232, 224, 204, 0.18) 75%
+		),
+		linear-gradient(
+			45deg,
+			rgba(232, 224, 204, 0.18) 25%,
+			transparent 25%,
+			transparent 75%,
+			rgba(232, 224, 204, 0.18) 75%
+		);
+	background-size: 6px 6px;
+	background-position:
+		0 0,
+		3px 3px;
+}
+@utility thumb-c {
+	background: var(--color-paper-lite);
+	color: var(--color-ink);
+	background-image: repeating-linear-gradient(45deg, var(--color-ink) 0 2px, transparent 2px 7px);
+}
+@utility thumb-d {
+	background: var(--color-ink);
+	color: var(--color-paper);
+	background-image: radial-gradient(circle, var(--color-paper) 1.2px, transparent 1.4px);
+	background-size: 8px 8px;
+}
+@utility thumb-e {
+	background: var(--color-paper-lite);
+	color: var(--color-ink);
+	background-image:
+		linear-gradient(to right, var(--color-ink) 1.5px, transparent 1.5px),
+		linear-gradient(to bottom, var(--color-ink) 1.5px, transparent 1.5px);
+	background-size: 12px 12px;
+}
+@utility thumb-f {
+	background: var(--color-ink);
+	color: var(--color-paper);
+	background-image: radial-gradient(circle, rgba(232, 224, 204, 0.25) 1.2px, transparent 1.4px);
+	background-size: 7px 7px;
+}
+@utility thumb-feat {
+	background: var(--color-ink);
+	color: var(--color-paper);
+	background-image: radial-gradient(circle, var(--color-paper) 1.2px, transparent 1.4px);
+	background-size: 9px 9px;
+}

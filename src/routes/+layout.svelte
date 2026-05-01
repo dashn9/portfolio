@@ -34,7 +34,7 @@
 					D<span class="text-accent">.</span>SHOGBON
 				</div>
 				<div class="font-pixel text-[9px] uppercase tracking-[0.12em] text-ink-4">
-					// FIELD NOTES FROM A SMALL STUDIO · EST. 2018
+					// FIELD NOTES FROM A SMALL STUDIO · EST. 2026
 				</div>
 			</div>
 			<div class="flex gap-1">
@@ -46,7 +46,7 @@
 		<div
 			class="flex items-center gap-2 px-3.5 py-2 font-pixel text-[9px] uppercase tracking-[0.12em] text-ink"
 		>
-			<span class="inline-block size-2 bg-accent"></span> AVAILABLE · MAY 2026
+			<span class="inline-block size-2 bg-accent"></span> BUILDING RUSTYBROWSER.COM
 			<button
 				type="button"
 				onclick={() => theme.toggle()}
@@ -88,7 +88,7 @@
 			<h5 class="mb-2.5 font-pixel text-[10px] uppercase tracking-[0.14em] text-paper">
 				<span class="text-accent">§</span> D.SHOGBON
 			</h5>
-			© 2018–2026<br />
+			© 2026–2026<br />
 			Copenhagen, DK<br />
 			55.6°N 12.5°E
 		</div>

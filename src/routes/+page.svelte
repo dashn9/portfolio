@@ -1,12 +1,5 @@
 <script lang="ts">
-	let email = $state('');
-	let joined = $state(false);
-
-	function onSubscribe(e: Event) {
-		e.preventDefault();
-		joined = true;
-		email = '';
-	}
+	import { NOTION_NEWSLETTER_URL } from '$lib/config';
 
 	type Project = {
 		code: string;
@@ -19,67 +12,67 @@
 
 	const projects: Project[] = [
 		{
-			code: '// WORK/008',
+			code: '// WORK/001',
 			year: '2025',
 			thumb: 'thumb-a',
-			thumbLabel: 'WILDFERN',
-			title: 'BOTANICAL PRESS',
-			sub: 'Identity · wordmark · packaging'
+			thumbLabel: 'rusty-browser',
+			title: 'RUSTY BROWSER',
+			sub: 'Rust · distributed · stealth cluster'
 		},
 		{
-			code: '// WORK/007',
+			code: '// WORK/002',
 			year: '2025',
 			thumb: 'thumb-b',
-			thumbLabel: 'HALFTONE',
-			title: 'SLOW READER',
-			sub: 'Product · web · calmer reading'
+			thumbLabel: 'rustenium',
+			title: 'RUSTENIUM',
+			sub: 'Rust · WebDriver BiDi · CDP'
 		},
 		{
-			code: '// WORK/006',
+			code: '// WORK/003',
 			year: '2025',
 			thumb: 'thumb-c',
-			thumbLabel: 'NORDLYS',
-			title: 'FESTIVAL IDENTITY',
-			sub: 'Identity · poster · Tromsø'
+			thumbLabel: 'rustenium-identity',
+			title: 'RUSTENIUM IDENTITY',
+			sub: 'Rust · fingerprint · spoofing'
+		},
+		{
+			code: '// WORK/004',
+			year: '2025',
+			thumb: 'thumb-d',
+			thumbLabel: 'ish-adf-bot',
+			title: 'ISH-ADF-BOT',
+			sub: 'Python · anti-detection · nodriver'
 		},
 		{
 			code: '// WORK/005',
 			year: '2024',
-			thumb: 'thumb-d',
-			thumbLabel: 'KINFOLK',
-			title: 'THE REISSUE',
-			sub: 'Editorial · type'
-		},
-		{
-			code: '// WORK/004',
-			year: '2023',
 			thumb: 'thumb-e',
-			thumbLabel: 'GRAINS',
-			title: 'CERAMICS STUDIO',
-			sub: 'Identity · web'
+			thumbLabel: 'code-chaos',
+			title: 'CODE CHAOS',
+			sub: 'Go · E2E stress testing · backend'
 		},
 		{
-			code: '// WORK/003',
-			year: '2022',
+			code: '// WORK/006',
+			year: '2024',
 			thumb: 'thumb-f',
-			thumbLabel: 'EMBER',
-			title: 'JOURNALING APP',
-			sub: 'Product · iOS'
+			thumbLabel: 'ish-bot-deploy',
+			title: 'BOT DEPLOY',
+			sub: 'Kubernetes · HCL · cloud infra'
 		}
 	];
 
 	const nowList = [
-		{ n: '/01', body: 'Finishing a wordmark for a botanical press in Oslo.', cat: 'IDENTITY' },
-		{ n: '/02', body: 'Reading <em>Shape of Time</em> (Kubler) — for the third time.', cat: 'READING' },
-		{ n: '/03', body: 'Drawing 36 dingbats for fun, not for money.', cat: 'TYPE' },
-		{ n: '/04', body: 'Teaching a half-course on editorial design at KADK.', cat: 'TEACHING' },
-		{ n: '/05', body: 'Listening to a lot of Grouper, mostly <em>Ruins</em>.', cat: 'MUSIC' },
-		{ n: '/06', body: 'Slow-cooking a typeface called <em>Småby</em>.', cat: 'TYPE' }
+		{ n: '/01', body: 'Pushing WebDriver BiDi multi-session handling in <em>rustenium</em> v2.', cat: 'RUST' },
+		{ n: '/02', body: 'Reading <em>Programming Rust</em> (Blandy) — for the second pass.', cat: 'READING' },
+		{ n: '/03', body: 'Wiring a WASM compilation target for the browser automation core.', cat: 'WASM' },
+		{ n: '/04', body: 'Hardening Kubernetes node affinity rules in <em>bot-deploy</em>.', cat: 'INFRA' },
+		{ n: '/05', body: 'Listening to a lot of Burial lately — good for long compile waits.', cat: 'MUSIC' },
+		{ n: '/06', body: 'Upstream fix in <em>chromiumoxide</em> for session leak on hard crash.', cat: 'OSS' }
 	];
 
 	const yearsBar = ['on', 'on', 'on', 'on', 'on', 'on', 'on', 'on', '', ''];
-	const projectsBar = ['hot', 'hot', 'on', 'on', 'on', 'on', 'on', '', '', ''];
-	const cupsBar = ['hot', 'hot', 'hot', 'on', 'on', 'on', 'on', 'on', '', ''];
+	const projectsBar = ['hot', 'hot', 'hot', 'on', 'on', 'on', 'on', 'on', '', ''];
+	const starsBar = ['hot', 'hot', 'on', 'on', 'on', 'on', 'on', 'on', '', ''];
 
 	function barCell(state: string) {
 		const base = 'h-2.5 flex-1 border border-ink';
@@ -99,7 +92,7 @@
 		<div class="mb-[18px] flex flex-wrap gap-2">
 			<span
 				class="border-[1.5px] border-ink px-1.5 py-0.5 font-pixel text-[9px] uppercase tracking-[0.12em] text-ink"
-				>EST 2018</span
+				>EST 2026</span
 			>
 			<span
 				class="border-[1.5px] border-ink px-1.5 py-0.5 font-pixel text-[9px] uppercase tracking-[0.12em] text-ink"
@@ -113,12 +106,11 @@
 		<h1
 			class="mb-[22px] font-serif text-[clamp(44px,6.5vw,80px)] font-normal leading-none tracking-[-0.025em] text-ink [&_em]:font-normal [&_em]:italic [&_em]:text-ink-3"
 		>
-			A small studio<br />for <em>careful things,</em><br />made on the internet.
+			A place to love.<br /><em>To learn, </em><br /><em>To play, </em><br />A place is Daniel.
 		</h1>
 		<p class="max-w-[50ch] font-mono text-[15px] leading-[1.6] text-ink-2">
-			I'm <mark>Daniel Shogbon</mark> — an independent designer working on identity, product, and
-			the quieter edges of interface design. Eight years in, mostly from a second-floor apartment
-			with a cat named Biscuit and a window that faces north.
+			Hi, I'm <mark>Daniel Shogbon</mark> — A quite tinkerer of symbols that births magic.<br/><br/>
+			Living in the domain of code and self. Eight years in, mostly from a room with fifteen windows, lots of sunlight and a dell keyboard.
 		</p>
 		<div class="mt-6 flex flex-wrap gap-2.5">
 			<a
@@ -147,16 +139,16 @@
 		<div class="bg-dot-ink flex flex-col gap-[18px] p-[22px]">
 			<div class="font-pixel">
 				<div class="text-[9px] uppercase tracking-[0.14em] opacity-70">» CURRENT</div>
-				<div class="mt-1.5 text-[16px] uppercase tracking-[0.04em] text-accent">OPEN FOR WORK</div>
+				<div class="mt-1.5 text-[16px] uppercase tracking-[0.04em] text-accent"><a href="https://github.com/dashn9/rusty-browser">Building Rusty Browser</a></div>
 				<div class="mt-1.5 text-[11px] uppercase tracking-[0.04em] text-paper opacity-85">
-					FROM 1 MAY 2026
+					FROM NOV 2026 - Launch APR 28
 				</div>
 			</div>
 			<pre
 				class="m-0 whitespace-pre border border-dashed border-paper-edge p-2.5 font-mono text-[11px] leading-[1.15] text-paper">╔═══════════════╗
-║ <span class="text-accent">▓▓▓▓▓▓▓░░░</span> 7/10 ║
-║ PROJECT BOOKED ║
-║ NEXT QUARTER   ║
+║ <span class="text-accent">▓▓▓▓▓▓▓░░░</span>    ║
+║ RUSTY BROWSER ║
+║ TILL INFINI   ║
 ╚═══════════════╝</pre>
 			<div class="font-pixel">
 				<div class="text-[9px] uppercase tracking-[0.14em] opacity-70">» LAST COMMIT</div>
@@ -226,9 +218,9 @@
 			</div>
 		{/snippet}
 
-		{@render stat('YEARS INDEPENDENT', '08', yearsBar)}
-		{@render stat('PROJECTS SHIPPED', '47', projectsBar)}
-		{@render stat('CUPS / WK', '22', cupsBar)}
+		{@render stat('YEARS CODING', '08', yearsBar)}
+		{@render stat('REPOS SHIPPED', '52', projectsBar)}
+		{@render stat('GITHUB STARS', '25', starsBar)}
 	</div>
 </section>
 
@@ -274,50 +266,40 @@
 	</div>
 </section>
 
-<!-- LETTER -->
+<!-- WRITING CTA -->
 <section
 	class="shadow-block-md bg-dot-letter grid grid-cols-1 border-2 border-ink bg-accent text-paper md:grid-cols-[1.6fr_1fr]"
 >
 	<div class="border-b-2 border-dashed border-black/25 p-8 md:border-b-0 md:border-r-2">
-		<div
-			class="mb-2.5 font-pixel text-[10px] uppercase tracking-[0.14em] text-white/85"
-		>
-			§ 005 — DEAR LETTER
+		<div class="mb-2.5 font-pixel text-[10px] uppercase tracking-[0.14em] text-white/85">
+			§ WRITING
 		</div>
 		<h2
 			class="mb-3 font-serif text-[clamp(28px,3.5vw,40px)] font-normal leading-[1.05] tracking-[-0.02em] text-paper [&_em]:italic [&_em]:text-white/[0.78]"
 		>
-			A quarterly letter,<br /><em>once every three months.</em>
+			Writing things <em>down.</em>
 		</h2>
 		<p class="m-0 max-w-[48ch] font-mono text-[14px] leading-[1.55] text-paper">
-			About type, process, the studio, things I read on the train, and occasionally a recipe for
-			soup. Usually arrives on a Sunday. No tracking, no ads, easy to leave.
+			Things worth writing down. Code, ideas, observations, the occasional detour — with a
+			particular lean toward automation and how machines interact with the web. Started January 2026.
+			No tracking, no ads.
 		</p>
 	</div>
-	<div class="flex flex-col justify-center gap-2.5 p-7 px-6">
-		<form onsubmit={onSubscribe} class="flex gap-1.5">
-			<input
-				type="email"
-				placeholder="you@elsewhere.com"
-				bind:value={email}
-				required
-				aria-label="Email address"
-				class="flex-1 border-2 border-ink bg-paper px-3 py-2.5 font-mono text-[14px] text-ink outline-none placeholder:text-ink-3"
-			/>
-			<button
-				type="submit"
-				class="press-block shadow-letter-btn border-2 border-ink bg-ink px-3.5 py-2.5 font-pixel text-[11px] uppercase tracking-[0.1em] text-paper hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0_rgba(0,0,0,0.4)]"
-				>JOIN →</button
-			>
-		</form>
-		{#if joined}
-			<div class="font-pixel text-[9px] uppercase tracking-[0.14em] text-white/[0.78]">
-				» THANKS. YOU ARE ON THE LIST.
-			</div>
-		{:else}
-			<div class="font-pixel text-[9px] uppercase tracking-[0.14em] text-white/[0.78]">
-				» CURRENT SUBSCRIBERS: 1,247 · 0% TRACKING · 100% LETTERS
-			</div>
-		{/if}
+	<div class="flex flex-col justify-center gap-3 p-7 px-6">
+		<a
+			href="/blog"
+			class="press-block shadow-letter-btn border-2 border-ink bg-ink px-5 py-3 text-center font-pixel text-[11px] uppercase tracking-[0.1em] text-paper no-underline hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0_rgba(0,0,0,0.4)]"
+			>READ THE WRITING →</a
+		>
+		<a
+			href={NOTION_NEWSLETTER_URL}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="border-2 border-dashed border-white/40 px-5 py-3 text-center font-pixel text-[11px] uppercase tracking-[0.1em] text-white/80 no-underline hover:border-white/80 hover:text-white"
+			>GET NOTIFIED ↗</a
+		>
+		<div class="font-pixel text-[9px] uppercase tracking-[0.14em] text-white/[0.78]">
+			» NO SPAM · NOTIFY VIA NOTION
+		</div>
 	</div>
 </section>

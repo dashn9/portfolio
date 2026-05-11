@@ -5,7 +5,7 @@
 	let { data } = $props();
 	const posts: Post[] = $derived(data.posts);
 
-	const tagsToolbar = ['ALL', 'ARTICLE', 'NOTES', 'LETTER'];
+	const tagsToolbar = ['ALL', 'ESSAY', 'NOTES', 'LETTER'];
 	let activeTag = $state('ALL');
 	let search = $state('');
 
@@ -30,7 +30,7 @@
 	);
 
 	const cloud = [
-		{ label: 'ARTICLE', hot: true },
+		{ label: 'ESSAY', hot: true },
 		{ label: 'NOTES' },
 		{ label: 'LETTER' },
 		{ label: 'RUST' },

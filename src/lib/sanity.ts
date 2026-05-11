@@ -22,18 +22,26 @@ export type Post = {
 	body?: unknown[];
 };
 
+const WORDS_PER_MINUTE = 220;
+const AVG_CHARS_PER_WORD = 5;
+
+function readTimeFromChars(chars: number): string {
+	const mins = Math.max(1, Math.round(chars / AVG_CHARS_PER_WORD / WORDS_PER_MINUTE));
+	return `${mins} MIN`;
+}
+
+function readTimeFromText(text: string): string {
+	const words = text.trim().split(/\s+/).filter(Boolean).length;
+	const mins = Math.max(1, Math.round(words / WORDS_PER_MINUTE));
+	return `${mins} MIN`;
+}
+
 function extractText(body: unknown[]): string {
 	if (!body?.length) return '';
 	return (body as Array<{ _type: string; children?: Array<{ text: string }> }>)
 		.filter((b) => b._type === 'block')
 		.map((b) => b.children?.map((c) => c.text).join('') ?? '')
 		.join(' ');
-}
-
-function calcReadTime(body: unknown[]): string {
-	const words = extractText(body).trim().split(/\s+/).filter(Boolean).length;
-	const mins = Math.max(1, Math.round(words / 220));
-	return `${mins} MIN`;
 }
 
 function formatDate(iso: string): string {
@@ -50,7 +58,7 @@ export async function getPosts(): Promise<Post[]> {
 		titleTail?: string;
 		desc: string;
 		cat: string;
-		body: unknown[];
+		bodyChars: number;
 	}>>(
 		`*[_type == "post"] | order(publishedAt desc) {
 			_id,
@@ -61,15 +69,21 @@ export async function getPosts(): Promise<Post[]> {
 			titleTail,
 			"desc": excerpt,
 			cat,
-			body
+			"bodyChars": length(pt::text(body))
 		}`
 	);
 
 	return raw.map((p, i) => ({
-		...p,
+		_id: p._id,
+		slug: p.slug,
+		title: p.title,
+		titleEm: p.titleEm,
+		titleTail: p.titleTail,
+		desc: p.desc,
+		cat: p.cat,
 		n: '/' + String(raw.length - i).padStart(3, '0'),
 		date: formatDate(p.date),
-		time: calcReadTime(p.body)
+		time: readTimeFromChars(p.bodyChars ?? 0)
 	}));
 }
 
@@ -104,6 +118,6 @@ export async function getPost(slug: string): Promise<Post | null> {
 		...p,
 		n: '',
 		date: formatDate(p.date),
-		time: calcReadTime(p.body)
+		time: readTimeFromText(extractText(p.body))
 	};
 }

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { NOTION_NEWSLETTER_URL } from '$lib/config';
+	import NewsletterForm from '$lib/components/NewsletterForm.svelte';
 	import type { Post } from '$lib/sanity';
 
 	let { data } = $props();
-	const posts: Post[] = data.posts;
+	const posts: Post[] = $derived(data.posts);
 
 	const tagsToolbar = ['ALL', 'ARTICLE', 'NOTES', 'LETTER'];
 	let activeTag = $state('ALL');
@@ -227,13 +227,7 @@
 			<p class="mb-3 font-mono text-[12px] leading-[1.5] text-ink-2">
 				New posts on automation, Rust, and stealth systems. No spam.
 			</p>
-			<a
-				href={NOTION_NEWSLETTER_URL}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="press-block shadow-block-sm flex items-center justify-center border-2 border-ink bg-accent px-3 py-2 font-pixel text-[10px] uppercase tracking-[0.12em] text-paper no-underline hover:translate-x-0.5 hover:translate-y-0.5 hover:bg-ink"
-				>NOTIFY ME →</a
-			>
+			<NewsletterForm variant="light" />
 		{/snippet}
 
 		{#snippet recentBody()}

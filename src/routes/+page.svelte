@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { NOTION_NEWSLETTER_URL } from '$lib/config';
+	import NewsletterForm from '$lib/components/NewsletterForm.svelte';
 
 	type Project = {
 		code: string;
@@ -96,7 +96,7 @@
 			>
 			<span
 				class="border-[1.5px] border-ink px-1.5 py-0.5 font-pixel text-[9px] uppercase tracking-[0.12em] text-ink"
-				>COPENHAGEN · 55.6°N</span
+				>Planet Earth</span
 			>
 			<span
 				class="border-[1.5px] border-accent bg-accent px-1.5 py-0.5 font-pixel text-[9px] uppercase tracking-[0.12em] text-paper"
@@ -291,15 +291,6 @@
 			class="press-block shadow-letter-btn border-2 border-ink bg-ink px-5 py-3 text-center font-pixel text-[11px] uppercase tracking-[0.1em] text-paper no-underline hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0_rgba(0,0,0,0.4)]"
 			>READ THE WRITING →</a
 		>
-		<a
-			href={NOTION_NEWSLETTER_URL}
-			target="_blank"
-			rel="noopener noreferrer"
-			class="border-2 border-dashed border-white/40 px-5 py-3 text-center font-pixel text-[11px] uppercase tracking-[0.1em] text-white/80 no-underline hover:border-white/80 hover:text-white"
-			>GET NOTIFIED ↗</a
-		>
-		<div class="font-pixel text-[9px] uppercase tracking-[0.14em] text-white/[0.78]">
-			» NO SPAM · NOTIFY VIA NOTION
-		</div>
+		<NewsletterForm variant="dark" />
 	</div>
 </section>

@@ -2,14 +2,40 @@
 	let name = $state('');
 	let email = $state('');
 	let message = $state('');
-	let sent = $state(false);
+	let website = $state(''); // honeypot
+	let status = $state<'idle' | 'submitting' | 'sent' | 'error'>('idle');
+	let errorMessage = $state('');
 
-	function onSubmit(e: Event) {
+	async function onSubmit(e: SubmitEvent) {
 		e.preventDefault();
-		sent = true;
-		name = '';
-		email = '';
-		message = '';
+		if (status === 'submitting') return;
+		status = 'submitting';
+		errorMessage = '';
+		try {
+			const res = await fetch('/api/contact', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ name, email, message, website })
+			});
+			let body: { error?: string } = {};
+			try {
+				body = await res.json();
+			} catch {
+				/* ignore */
+			}
+			if (!res.ok) {
+				status = 'error';
+				errorMessage = body.error ?? `Request failed (${res.status}).`;
+				return;
+			}
+			status = 'sent';
+			name = '';
+			email = '';
+			message = '';
+		} catch {
+			status = 'error';
+			errorMessage = 'Network error. Check your connection and try again.';
+		}
 	}
 
 	const links = [
@@ -57,8 +83,8 @@
 				target="_blank"
 				rel="noopener noreferrer"
 				class="text-accent no-underline hover:underline">Rusty Browser</a
-			>. Not taking contract work right now, but always open to conversations about browser
-			automation, Rust, or distributed systems.
+			>. but always open to conversations about browser
+			automation, Rust, golang or distributed systems.
 			<br /><br />
 			Response time is usually within 48 hours.
 		</p>
@@ -97,14 +123,23 @@
 			// SEND.MESSAGE
 		</div>
 		<div class="p-7">
-			{#if sent}
+			{#if status === 'sent'}
 				<div
 					class="border-2 border-accent bg-accent-soft px-5 py-6 font-pixel text-[11px] uppercase tracking-[0.12em] text-ink"
 				>
 					» MESSAGE RECEIVED. TALK SOON.
 				</div>
 			{:else}
-				<form class="flex flex-col gap-4" onsubmit={onSubmit}>
+				<form class="flex flex-col gap-4" onsubmit={onSubmit} novalidate>
+					<input
+						type="text"
+						tabindex="-1"
+						autocomplete="off"
+						bind:value={website}
+						aria-hidden="true"
+						class="absolute left-[-9999px] h-px w-px opacity-0"
+						name="website"
+					/>
 					<div class="flex flex-col gap-1.5">
 						<label for="c-name" class="font-pixel text-[9px] uppercase tracking-[0.14em] text-accent"
 							>» NAME</label
@@ -128,7 +163,7 @@
 							type="email"
 							bind:value={email}
 							required
-							placeholder="you@elsewhere.com"
+							placeholder="ishogbon@gmail.com"
 							class="border-2 border-ink bg-paper px-3 py-2.5 font-mono text-[14px] text-ink outline-none placeholder:text-ink-3 focus:border-accent"
 						/>
 					</div>
@@ -145,11 +180,22 @@
 							class="resize-none border-2 border-ink bg-paper px-3 py-2.5 font-mono text-[14px] text-ink outline-none placeholder:text-ink-3 focus:border-accent"
 						></textarea>
 					</div>
-					<button
-						type="submit"
-						class="press-block shadow-block-sm self-start border-2 border-ink bg-accent px-[22px] py-[11px] font-pixel text-[11px] uppercase tracking-[0.1em] text-paper hover:press-block-on hover:bg-ink"
-						>SEND NOTE →</button
-					>
+					<div class="flex flex-wrap items-center gap-3">
+						<button
+							type="submit"
+							disabled={status === 'submitting'}
+							class="press-block shadow-block-sm border-2 border-ink bg-accent px-[22px] py-[11px] font-pixel text-[11px] uppercase tracking-[0.1em] text-paper hover:press-block-on hover:bg-ink disabled:cursor-not-allowed disabled:opacity-60"
+						>
+							{status === 'submitting' ? 'SENDING…' : 'SEND NOTE →'}
+						</button>
+						{#if status === 'error'}
+							<span
+								role="alert"
+								class="font-pixel text-[10px] uppercase tracking-[0.12em] text-accent"
+								>» {errorMessage}</span
+							>
+						{/if}
+					</div>
 				</form>
 			{/if}
 		</div>

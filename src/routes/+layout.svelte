@@ -89,8 +89,7 @@
 				<span class="text-accent">§</span> D.SHOGBON
 			</h5>
 			© 2026–2026<br />
-			Copenhagen, DK<br />
-			55.6°N 12.5°E
+			In my mind.
 		</div>
 		<div
 			class="border-b-2 border-paper-edge p-4 font-pixel text-[10px] uppercase leading-[1.7] tracking-[0.08em] text-ink-4 md:border-b-0 md:border-r-2"
@@ -110,10 +109,8 @@
 			<h5 class="mb-2.5 font-pixel text-[10px] uppercase tracking-[0.14em] text-paper">
 				<span class="text-accent">§</span> ELSEWHERE
 			</h5>
-			<a href="#" class="block py-px text-paper no-underline hover:text-accent">are.na ↗</a>
-			<a href="#" class="block py-px text-paper no-underline hover:text-accent">read.cv ↗</a>
-			<a href="#" class="block py-px text-paper no-underline hover:text-accent">instagram ↗</a>
-			<a href="#" class="block py-px text-paper no-underline hover:text-accent">RSS ↗</a>
+			<a href="https://github.com/dashn9" class="block py-px text-paper no-underline hover:text-accent">Github ↗</a>
+			<a href="https://x.com/" class="block py-px text-paper no-underline hover:text-accent">X ↗</a>
 		</div>
 		<div class="p-4 font-pixel text-[10px] uppercase leading-[1.7] tracking-[0.08em] text-ink-4">
 			<h5 class="mb-2.5 font-pixel text-[10px] uppercase tracking-[0.14em] text-paper">

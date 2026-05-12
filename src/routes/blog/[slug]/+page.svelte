@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { PortableText } from '@portabletext/svelte';
 	let { data } = $props();
 	const { post } = data;
 </script>
@@ -43,21 +44,9 @@
 	</div>
 
 	<!-- POST BODY -->
-	<div class="mx-auto max-w-[72ch] px-9 py-10 font-mono text-[15px] leading-[1.75] text-ink-2">
+	<div class="portable-text mx-auto max-w-[72ch] px-9 py-10 font-mono text-[15px] leading-[1.75] text-ink-2">
 		{#if post.body && Array.isArray(post.body)}
-			{#each post.body as block (block._key ?? block)}
-				{#if block._type === 'block'}
-					{#if block.style === 'h2'}
-						<h2 class="mb-4 mt-8 font-serif text-[28px] font-normal leading-[1.1] tracking-[-0.02em] text-ink">{block.children?.map((c: {text: string}) => c.text).join('')}</h2>
-					{:else if block.style === 'h3'}
-						<h3 class="mb-3 mt-6 font-serif text-[22px] font-normal leading-[1.1] text-ink">{block.children?.map((c: {text: string}) => c.text).join('')}</h3>
-					{:else}
-						<p class="mb-4">{block.children?.map((c: {text: string}) => c.text).join('')}</p>
-					{/if}
-				{:else if block._type === 'code'}
-					<pre class="mb-4 overflow-x-auto border-2 border-ink bg-ink p-4 font-mono text-[13px] leading-[1.6] text-paper"><code>{block.code}</code></pre>
-				{/if}
-			{/each}
+			<PortableText value={post.body} />
 		{:else}
 			<p class="text-ink-3 italic">Post content coming soon.</p>
 		{/if}

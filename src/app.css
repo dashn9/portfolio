@@ -79,6 +79,75 @@
 	}
 }
 
+/* ---- Portable text body ------------------------------------------------ */
+.portable-text h2 {
+	font-family: var(--font-serif);
+	font-size: 28px;
+	font-weight: 400;
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+	color: var(--color-ink);
+	margin-top: 2.5rem;
+	margin-bottom: 1rem;
+}
+.portable-text h3 {
+	font-family: var(--font-serif);
+	font-size: 22px;
+	font-weight: 400;
+	line-height: 1.1;
+	color: var(--color-ink);
+	margin-top: 2rem;
+	margin-bottom: 0.75rem;
+}
+.portable-text p {
+	margin-bottom: 1.25rem;
+}
+.portable-text strong {
+	color: var(--color-ink);
+	font-weight: 700;
+}
+.portable-text em {
+	font-style: italic;
+	color: var(--color-ink-3);
+}
+.portable-text code {
+	font-family: var(--font-mono);
+	font-size: 0.875em;
+	background: var(--color-ink);
+	color: var(--color-paper);
+	padding: 0.1em 0.35em;
+}
+.portable-text a {
+	color: var(--color-accent);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	overflow-wrap: break-word;
+	word-break: break-all;
+}
+.portable-text a:hover {
+	color: var(--color-ink);
+}
+.portable-text blockquote {
+	border-left: 4px solid var(--color-accent);
+	padding-left: 1.25rem;
+	color: var(--color-ink-3);
+	font-style: italic;
+	margin-bottom: 1.25rem;
+}
+.portable-text ul {
+	list-style: disc;
+	padding-left: 1.5rem;
+	margin-bottom: 1.25rem;
+}
+.portable-text ol {
+	list-style: decimal;
+	padding-left: 1.5rem;
+	margin-bottom: 1.25rem;
+}
+.portable-text li {
+	margin-bottom: 0.35rem;
+}
+
 /* ---- Hard-edged offset block shadows (the signature) ----------------- */
 @utility shadow-block-xs {
 	box-shadow: 2px 2px 0 var(--color-ink);

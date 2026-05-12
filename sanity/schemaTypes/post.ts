@@ -46,7 +46,7 @@ export default defineType({
       type: 'string',
       options: {
         list: [
-          {title: 'Article', value: 'ARTICLE'},
+          {title: 'Essay', value: 'ESSAY'},
           {title: 'Notes', value: 'NOTES'},
           {title: 'Letter', value: 'LETTER'},
         ],
@@ -65,7 +65,11 @@ export default defineType({
     defineField({
       name: 'body',
       title: 'Body',
-      type: 'blockContent',
+      type: 'array',
+      of: [
+        {type: 'block'},
+        {type: 'image'},
+      ],
     }),
   ],
 

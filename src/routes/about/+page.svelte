@@ -42,6 +42,13 @@
 				class="press-block shadow-block-sm border-2 border-ink bg-paper-lite px-[18px] py-[11px] font-pixel text-[11px] uppercase tracking-[0.1em] text-ink no-underline hover:press-block-on hover:bg-ink hover:text-paper"
 				>SEND A NOTE</a
 			>
+			<a
+				href="/cv/DanielShogbon_resume_20250506.pdf"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="press-block shadow-block-sm border-2 border-ink bg-paper-lite px-[18px] py-[11px] font-pixel text-[11px] uppercase tracking-[0.1em] text-ink no-underline hover:press-block-on hover:bg-ink hover:text-paper"
+				>RÉSUMÉ ↓</a
+			>
 		</div>
 	</div>
 	<div class="grid grid-rows-[auto_1fr_auto] bg-ink text-paper">

@@ -49,6 +49,8 @@ export default defineType({
           {title: 'Essay', value: 'ESSAY'},
           {title: 'Notes', value: 'NOTES'},
           {title: 'Letter', value: 'LETTER'},
+          {title: 'Idea', value: 'IDEA'},
+          {title: 'Thoughts', value: 'THOUGHTS'},
         ],
         layout: 'radio',
       },
@@ -61,6 +63,13 @@ export default defineType({
       rows: 3,
       description: 'Short description shown in the post listing',
       validation: (Rule) => Rule.required().max(240),
+    }),
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'tag'}]}],
+      description: 'Pick existing tags or create new ones inline. Used to filter the archive.',
     }),
     defineField({
       name: 'body',

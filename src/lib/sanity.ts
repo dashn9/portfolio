@@ -18,6 +18,7 @@ export type Post = {
 	titleTail?: string;
 	desc: string;
 	cat: string;
+	tags?: string[];
 	time: string;
 	body?: unknown[];
 };
@@ -58,6 +59,7 @@ export async function getPosts(): Promise<Post[]> {
 		titleTail?: string;
 		desc: string;
 		cat: string;
+		tags?: string[];
 		bodyChars: number;
 	}>>(
 		`*[_type == "post"] | order(publishedAt desc) {
@@ -69,6 +71,7 @@ export async function getPosts(): Promise<Post[]> {
 			titleTail,
 			"desc": excerpt,
 			cat,
+			"tags": tags[]->title,
 			"bodyChars": length(pt::text(body))
 		}`
 	);
@@ -81,6 +84,7 @@ export async function getPosts(): Promise<Post[]> {
 		titleTail: p.titleTail,
 		desc: p.desc,
 		cat: p.cat,
+		tags: p.tags ?? [],
 		n: '/' + String(raw.length - i).padStart(3, '0'),
 		date: formatDate(p.date),
 		time: readTimeFromChars(p.bodyChars ?? 0)
@@ -97,6 +101,7 @@ export async function getPost(slug: string): Promise<Post | null> {
 		titleTail?: string;
 		desc: string;
 		cat: string;
+		tags?: string[];
 		body: unknown[];
 	} | null>(
 		`*[_type == "post" && slug.current == $slug][0] {
@@ -108,6 +113,7 @@ export async function getPost(slug: string): Promise<Post | null> {
 			titleTail,
 			"desc": excerpt,
 			cat,
+			"tags": tags[]->title,
 			body
 		}`,
 		{ slug }
@@ -116,6 +122,7 @@ export async function getPost(slug: string): Promise<Post | null> {
 	if (!p) return null;
 	return {
 		...p,
+		tags: p.tags ?? [],
 		n: '',
 		date: formatDate(p.date),
 		time: readTimeFromText(extractText(p.body))

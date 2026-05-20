@@ -5,18 +5,20 @@
 	let { data } = $props();
 	const posts: Post[] = $derived(data.posts);
 
-	const tagsToolbar = ['ALL', 'ESSAY', 'NOTES', 'LETTER'];
-	let activeTag = $state('ALL');
+	const catToolbar = ['ALL', 'ESSAY', 'NOTES', 'LETTER', 'IDEA', 'THOUGHTS'];
+	let activeCat = $state('ALL');
+	let activeTag = $state<string | null>(null);
 	let search = $state('');
 
 	const filtered = $derived(
 		posts.filter((p) => {
-			const matchTag = activeTag === 'ALL' || p.cat === activeTag;
+			const matchCat = activeCat === 'ALL' || p.cat === activeCat;
+			const matchTag = !activeTag || (p.tags ?? []).includes(activeTag);
 			const matchSearch =
 				!search ||
 				p.title.toLowerCase().includes(search.toLowerCase()) ||
 				p.desc.toLowerCase().includes(search.toLowerCase());
-			return matchTag && matchSearch;
+			return matchCat && matchTag && matchSearch;
 		})
 	);
 
@@ -29,18 +31,9 @@
 		}))
 	);
 
-	const cloud = [
-		{ label: 'ESSAY', hot: true },
-		{ label: 'NOTES' },
-		{ label: 'LETTER' },
-		{ label: 'RUST' },
-		{ label: 'AUTOMATION' },
-		{ label: 'ANTI-DETECTION' },
-		{ label: 'WEBDRIVER' },
-		{ label: 'KUBERNETES' },
-		{ label: 'PYTHON' },
-		{ label: 'GO' }
-	];
+	const cloud = $derived(
+		[...new Set(posts.flatMap((p) => p.tags ?? []))].sort((a, b) => a.localeCompare(b))
+	);
 
 	const stats = $derived([
 		{ k: 'POSTS', v: String(posts.length).padStart(2, '0'), hot: true },
@@ -111,20 +104,35 @@
 		/>
 	</div>
 	<div class="flex flex-wrap items-center gap-1.5 px-3.5 py-2.5">
-		{#each tagsToolbar as tag (tag)}
+		{#each catToolbar as cat (cat)}
 			<button
 				type="button"
-				onclick={() => (activeTag = tag)}
+				onclick={() => (activeCat = cat)}
 				class={[
 					'cursor-pointer border-[1.5px] px-2 py-1 font-pixel text-[9px] uppercase tracking-[0.12em]',
-					activeTag === tag
+					activeCat === cat
 						? 'border-accent bg-accent text-paper hover:border-ink hover:bg-ink'
 						: 'border-ink bg-paper-lite text-ink hover:bg-ink hover:text-paper'
-				]}>{tag}</button
+				]}>{cat}</button
 			>
 		{/each}
 	</div>
 </div>
+
+{#if activeTag}
+	<div
+		class="shadow-block-sm flex items-center justify-between gap-3 border-2 border-ink bg-ink px-3.5 py-2 font-pixel text-[10px] uppercase tracking-[0.14em] text-paper"
+	>
+		<span>» FILTERING BY TAG · <span class="text-accent">#{activeTag}</span></span>
+		<button
+			type="button"
+			onclick={() => (activeTag = null)}
+			class="cursor-pointer border-[1.5px] border-accent px-2 py-0.5 text-accent hover:bg-accent hover:text-paper"
+		>
+			CLEAR ✕
+		</button>
+	</div>
+{/if}
 
 <!-- MAIN GRID -->
 <div class="grid grid-cols-1 items-start gap-4 lg:grid-cols-[1fr_280px]">
@@ -180,19 +188,43 @@
 			</div>
 
 			{#each filtered as post (post._id ?? post.n)}
-				<a
-					href="/blog/{post.slug}"
-					class="grid grid-cols-1 items-baseline gap-3.5 border-b border-dashed border-ink-4 px-[18px] py-3.5 text-inherit no-underline transition-colors duration-100 ease-[steps(2,end)] last:border-b-0 hover:bg-accent hover:text-paper hover:[&_*]:text-paper md:grid-cols-[110px_60px_1fr_110px_70px]"
+				<div
+					class="grid grid-cols-1 items-baseline gap-3.5 border-b border-dashed border-ink-4 px-[18px] py-3.5 last:border-b-0 md:grid-cols-[110px_60px_1fr_110px_70px]"
 				>
-					<div class="font-pixel text-[10px] tracking-[0.12em] text-accent">{post.n}</div>
+					<a
+						href="/blog/{post.slug}"
+						class="font-pixel text-[10px] tracking-[0.12em] text-accent no-underline hover:underline"
+						>{post.n}</a
+					>
 					<div class="font-pixel text-[10px] tracking-[0.06em] text-ink-3">{post.date}</div>
 					<div>
-						<div
-							class="mb-1 font-serif text-[22px] leading-[1.15] tracking-[-0.01em] text-ink [&_em]:italic [&_em]:text-ink-3"
+						<a
+							href="/blog/{post.slug}"
+							class="block text-inherit no-underline hover:[&_.t]:text-accent"
 						>
-							{post.title}{#if post.titleEm}<em>{post.titleEm}</em>{/if}{post.titleTail ?? ''}
-						</div>
-						<p class="m-0 max-w-[56ch] font-mono text-[12px] text-ink-3">{post.desc}</p>
+							<div
+								class="t mb-1 font-serif text-[22px] leading-[1.15] tracking-[-0.01em] text-ink [&_em]:italic [&_em]:text-ink-3"
+							>
+								{post.title}{#if post.titleEm}<em>{post.titleEm}</em>{/if}{post.titleTail ?? ''}
+							</div>
+							<p class="m-0 max-w-[56ch] font-mono text-[12px] text-ink-3">{post.desc}</p>
+						</a>
+						{#if post.tags && post.tags.length}
+							<div class="mt-2 flex flex-wrap gap-1">
+								{#each post.tags as t (t)}
+									<button
+										type="button"
+										onclick={() => (activeTag = t)}
+										class={[
+											'cursor-pointer border-[1.5px] px-1.5 py-0.5 font-pixel text-[9px] uppercase tracking-[0.1em]',
+											activeTag === t
+												? 'border-accent bg-accent text-paper'
+												: 'border-ink-4 text-ink-3 hover:border-ink hover:bg-ink hover:text-paper'
+										]}>#{t}</button
+									>
+								{/each}
+							</div>
+						{/if}
 					</div>
 					<span
 						class="self-center justify-self-start border-[1.5px] border-ink px-1.5 py-0.5 font-pixel text-[9px] uppercase tracking-[0.12em] text-ink md:justify-self-start"
@@ -202,7 +234,7 @@
 						class="self-center justify-self-start font-pixel text-[9px] uppercase tracking-[0.12em] text-ink-3 md:justify-self-end"
 						>{post.time}</span
 					>
-				</a>
+				</div>
 			{/each}
 		</section>
 
@@ -258,18 +290,24 @@
 		{/snippet}
 
 		{#snippet tagsBody()}
-			<div class="flex flex-wrap gap-1.5">
-				{#each cloud as tag (tag.label)}
-					<button
-						type="button"
-						onclick={() => { activeTag = tagsToolbar.includes(tag.label) ? tag.label : 'ALL'; }}
-						class={[
-							'cursor-pointer border-[1.5px] px-1.5 py-0.5 font-pixel text-[9px] uppercase tracking-[0.1em]',
-							tag.hot ? 'border-accent bg-accent text-paper' : 'border-ink text-ink hover:bg-ink hover:text-paper'
-						]}>{tag.label}</button
-					>
-				{/each}
-			</div>
+			{#if cloud.length}
+				<div class="flex flex-wrap gap-1.5">
+					{#each cloud as tag (tag)}
+						<button
+							type="button"
+							onclick={() => (activeTag = activeTag === tag ? null : tag)}
+							class={[
+								'cursor-pointer border-[1.5px] px-1.5 py-0.5 font-pixel text-[9px] uppercase tracking-[0.1em]',
+								activeTag === tag
+									? 'border-accent bg-accent text-paper'
+									: 'border-ink text-ink hover:bg-ink hover:text-paper'
+							]}>#{tag}</button
+						>
+					{/each}
+				</div>
+			{:else}
+				<p class="m-0 font-mono text-[12px] text-ink-3">No tags yet.</p>
+			{/if}
 		{/snippet}
 
 		{@render box('NOTIFY', notifyBody)}

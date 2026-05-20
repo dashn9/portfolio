@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import NewsletterForm from '$lib/components/NewsletterForm.svelte';
 
 	type Project = {
@@ -9,6 +10,83 @@
 		title: string;
 		sub: string;
 	};
+
+	type Commit = {
+		repo: string;
+		sha: string;
+		message: string;
+		date: string;
+		url: string;
+	};
+
+	let commits = $state<Commit[]>([]);
+	let commitsError = $state(false);
+	let commitsLoading = $state(true);
+
+	type GhPushEvent = {
+		type: string;
+		created_at: string;
+		repo: { name: string };
+		payload: { head?: string };
+	};
+
+	type GhCommit = { sha: string; commit: { message: string } };
+
+	function formatDate(iso: string) {
+		const d = new Date(iso);
+		const y = d.getFullYear();
+		const m = String(d.getMonth() + 1).padStart(2, '0');
+		const day = String(d.getDate()).padStart(2, '0');
+		return `${y}.${m}.${day}`;
+	}
+
+	const GH = 'https://api.github.com';
+	const GH_HEADERS = { Accept: 'application/vnd.github+json' };
+
+	onMount(async () => {
+		try {
+			const res = await fetch(`${GH}/users/dashn9/events/public?per_page=100`, {
+				headers: GH_HEADERS
+			});
+			if (!res.ok) throw new Error(`events ${res.status}`);
+			const events = (await res.json()) as GhPushEvent[];
+
+			const targets: { repo: string; sha: string; date: string }[] = [];
+			for (const e of events) {
+				if (e.type !== 'PushEvent') continue;
+				const repoFull = e.repo?.name;
+				const head = e.payload?.head;
+				if (!repoFull || !head) continue;
+				targets.push({ repo: repoFull, sha: head, date: e.created_at });
+				if (targets.length >= 8) break;
+			}
+
+			const details = await Promise.all(
+				targets.map((t) =>
+					fetch(`${GH}/repos/${t.repo}/commits/${t.sha}`, { headers: GH_HEADERS })
+						.then((r) => (r.ok ? (r.json() as Promise<GhCommit>) : null))
+						.catch(() => null)
+				)
+			);
+
+			commits = targets.map((t, i) => {
+				const detail = details[i];
+				const message = (detail?.commit.message ?? '').split('\n')[0].slice(0, 80);
+				const shortName = t.repo.split('/').pop() ?? t.repo;
+				return {
+					repo: shortName,
+					sha: t.sha.slice(0, 7),
+					message,
+					date: formatDate(t.date),
+					url: `https://github.com/${t.repo}/commit/${t.sha}`
+				};
+			});
+		} catch {
+			commitsError = true;
+		} finally {
+			commitsLoading = false;
+		}
+	});
 
 	const projects: Project[] = [
 		{
@@ -21,6 +99,14 @@
 		},
 		{
 			code: '// WORK/002',
+			year: '2026',
+			thumb: 'thumb-f',
+			thumbLabel: 'path-findeR',
+			title: 'path-findeR',
+			sub: 'Rust · Go · TS · extraction'
+		},
+		{
+			code: '// WORK/003',
 			year: '2025',
 			thumb: 'thumb-b',
 			thumbLabel: 'rustenium',
@@ -28,7 +114,7 @@
 			sub: 'Rust · WebDriver BiDi · CDP'
 		},
 		{
-			code: '// WORK/003',
+			code: '// WORK/004',
 			year: '2025',
 			thumb: 'thumb-c',
 			thumbLabel: 'rustenium-identity',
@@ -36,7 +122,7 @@
 			sub: 'Rust · fingerprint · spoofing'
 		},
 		{
-			code: '// WORK/004',
+			code: '// WORK/005',
 			year: '2025',
 			thumb: 'thumb-d',
 			thumbLabel: 'ish-adf-bot',
@@ -44,20 +130,12 @@
 			sub: 'Python · anti-detection · nodriver'
 		},
 		{
-			code: '// WORK/005',
+			code: '// WORK/006',
 			year: '2024',
 			thumb: 'thumb-e',
 			thumbLabel: 'code-chaos',
 			title: 'CODE CHAOS',
 			sub: 'Go · E2E stress testing · backend'
-		},
-		{
-			code: '// WORK/006',
-			year: '2024',
-			thumb: 'thumb-f',
-			thumbLabel: 'ish-bot-deploy',
-			title: 'BOT DEPLOY',
-			sub: 'Kubernetes · HCL · cloud infra'
 		}
 	];
 
@@ -151,10 +229,43 @@
 ║ TILL INFINI   ║
 ╚═══════════════╝</pre>
 			<div class="font-pixel">
-				<div class="text-[9px] uppercase tracking-[0.14em] opacity-70">» LAST COMMIT</div>
-				<div class="mt-1.5 text-[16px] uppercase tracking-[0.04em] text-paper">
-					2026.04.22 · WILDFERN
+				<div class="flex items-baseline justify-between">
+					<div class="text-[9px] uppercase tracking-[0.14em] opacity-70">» RECENT PUBLIC COMMITS</div>
+					<div class="text-[8px] uppercase tracking-[0.12em] text-accent">@DASHN9</div>
 				</div>
+				<ul class="mt-2 m-0 list-none p-0">
+					{#each commits as c (c.sha)}
+						<li class="border-b border-dashed border-paper-edge py-1.5 last:border-b-0">
+							<a
+								href={c.url}
+								target="_blank"
+								rel="noopener"
+								class="block no-underline text-paper hover:text-accent"
+							>
+								<div class="flex items-baseline justify-between gap-2">
+									<span class="text-[11px] uppercase tracking-[0.04em] truncate">{c.repo}</span>
+									<span class="text-[8px] tracking-[0.06em] opacity-65 shrink-0">{c.date}</span>
+								</div>
+								<div class="mt-0.5 font-mono text-[10px] leading-snug opacity-80 normal-case tracking-normal line-clamp-2">
+									{c.message}
+								</div>
+							</a>
+						</li>
+					{:else}
+						{#if commitsLoading}
+							{#each Array(3) as _, i (i)}
+								<li class="border-b border-dashed border-paper-edge py-1.5 last:border-b-0">
+									<div class="h-3 w-3/4 bg-paper-edge/40"></div>
+									<div class="mt-1 h-2 w-1/2 bg-paper-edge/30"></div>
+								</li>
+							{/each}
+						{:else if commitsError}
+							<li class="py-1.5 text-[10px] tracking-[0.04em] text-paper opacity-60">
+								// GH FEED UNREACHABLE
+							</li>
+						{/if}
+					{/each}
+				</ul>
 			</div>
 		</div>
 		<div
@@ -170,12 +281,12 @@
 	class="shadow-block-sm relative overflow-hidden whitespace-nowrap border-2 border-ink bg-ink py-2.5 font-pixel text-[11px] uppercase tracking-[0.18em] text-paper"
 >
 	<div class="inline-block animate-marquee pl-[100%]">
-		★ WILDFERN BOTANICAL PRESS — TDC EXCELLENCE 2024 <span class="mx-3.5 text-accent">·</span>
-		HALFTONE — A READER FOR SLOW ESSAYS, NOW IN PUBLIC BETA <span class="mx-3.5 text-accent">·</span>
-		NEW LETTER POSTED — "ON KERNING BY EAR" <span class="mx-3.5 text-accent">·</span>
-		TEACHING EDITORIAL DESIGN AT KADK · SPRING 2026 <span class="mx-3.5 text-accent">·</span>
-		AVAILABLE FOR NEW WORK FROM 1 MAY <span class="mx-3.5 text-accent">·</span>
-		★ WILDFERN BOTANICAL PRESS — TDC EXCELLENCE 2024 <span class="mx-3.5 text-accent">·</span>
+		★ PATH-FINDER — SELF-LEARNING WEB EXTRACTION, NOW PUBLIC <span class="mx-3.5 text-accent">·</span>
+		RUSTENIUM v2 — WEBDRIVER BIDI MULTI-SESSION HANDLING <span class="mx-3.5 text-accent">·</span>
+		RUSTY BROWSER — DISTRIBUTED STEALTH AUTOMATION IN RUST <span class="mx-3.5 text-accent">·</span>
+		NEW LETTER POSTED — STARTED WRITING IN JANUARY 2026 <span class="mx-3.5 text-accent">·</span>
+		AVAILABLE FOR NEW WORK FROM JUNE 2026 <span class="mx-3.5 text-accent">·</span>
+		★ PATH-FINDER — SELF-LEARNING WEB EXTRACTION, NOW PUBLIC <span class="mx-3.5 text-accent">·</span>
 	</div>
 </div>
 
@@ -220,7 +331,7 @@
 
 		{@render stat('YEARS CODING', '08', yearsBar)}
 		{@render stat('REPOS SHIPPED', '52', projectsBar)}
-		{@render stat('GITHUB STARS', '25', starsBar)}
+		{@render stat('GITHUB STARS', '28', starsBar)}
 	</div>
 </section>
 

@@ -7,21 +7,31 @@
 			title: 'RUSTY BROWSER',
 			sub: 'Rust · distributed · stealth cluster',
 			desc: 'Distributed, AI-driven browser automation cluster built in Rust. Orchestrates headless Chromium instances across nodes with stealth fingerprinting, session pooling, and fault-tolerant task routing.',
-			stars: 3,
+			stars: 6,
 			url: 'https://rustybrowser.com'
 		},
 		{
 			code: '// 002',
+			year: '2026',
+			thumb: 'thumb-d',
+			title: 'path-findeR',
+			sub: 'Rust · Go · TS · extraction',
+			desc: 'Self-learning web page extraction service. Feed it a handful of pages from the same template and it returns a stable CSS selector manifest — LLM labels the meaningful zones, the pipeline derives and validates selectors across the corpus.',
+			stars: 0,
+			url: 'https://github.com/dashn9/path-findeR'
+		},
+		{
+			code: '// 003',
 			year: '2025',
 			thumb: 'thumb-b',
 			title: 'RUSTENIUM',
 			sub: 'Rust · WebDriver BiDi · CDP',
 			desc: 'Native Rust engine for the WebDriver BiDi Protocol and Chrome DevTools Protocol. Async-first, zero Node.js dependency, full protocol coverage.',
-			stars: 17,
+			stars: 18,
 			url: 'https://github.com/dashn9/rustenium'
 		},
 		{
-			code: '// 003',
+			code: '// 004',
 			year: '2025',
 			thumb: 'thumb-c',
 			title: 'RUSTENIUM IDENTITY',
@@ -31,7 +41,7 @@
 			url: 'https://github.com/dashn9/rustenium-identity'
 		},
 		{
-			code: '// 004',
+			code: '// 005',
 			year: '2025',
 			thumb: 'thumb-d',
 			title: 'ISH-ADF-BOT',
@@ -41,7 +51,7 @@
 			url: 'https://github.com/dashn9/ish-adf-bot'
 		},
 		{
-			code: '// 005',
+			code: '// 006',
 			year: '2024',
 			thumb: 'thumb-e',
 			title: 'CODE CHAOS',
@@ -51,7 +61,7 @@
 			url: 'https://github.com/dashn9/code-chaos'
 		},
 		{
-			code: '// 006',
+			code: '// 007',
 			year: '2024',
 			thumb: 'thumb-f',
 			title: 'BOT DEPLOY',
@@ -61,7 +71,7 @@
 			url: 'https://github.com/dashn9/ish-bot-deploy'
 		},
 		{
-			code: '// 007',
+			code: '// 008',
 			year: '2024',
 			thumb: 'thumb-a',
 			title: 'SERVERLESS FLUX',
@@ -71,7 +81,7 @@
 			url: 'https://github.com/dashn9/serverless-flux'
 		},
 		{
-			code: '// 008',
+			code: '// 009',
 			year: '2024',
 			thumb: 'thumb-b',
 			title: 'SERVERLESS AGENT',
@@ -81,7 +91,7 @@
 			url: 'https://github.com/dashn9/serverless-agent'
 		},
 		{
-			code: '// 009',
+			code: '// 010',
 			year: '2025',
 			thumb: 'thumb-c',
 			title: 'FP SPOOFER',
@@ -164,7 +174,7 @@
 		<div
 			class="flex justify-between border-t-2 border-paper-edge px-3.5 py-3 font-pixel text-[9px] uppercase tracking-[0.14em] text-ink-4"
 		>
-			<span>RUST · OPEN SOURCE</span><span>3 ★ ON GITHUB</span>
+			<span>RUST · OPEN SOURCE</span><span>6 ★ ON GITHUB</span>
 		</div>
 	</div>
 </section>

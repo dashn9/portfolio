@@ -1,6 +1,17 @@
 import { createClient } from '@sanity/client';
 import { env } from '$env/dynamic/public';
 
+const where = typeof window === 'undefined' ? 'server' : 'browser';
+if (!env) {
+	console.warn(
+		`[sanity:${where}] env from $env/dynamic/public is undefined — runtime public vars are not available here.`
+	);
+} else if (!env.PUBLIC_SANITY_PROJECT_ID) {
+	console.warn(
+		`[sanity:${where}] PUBLIC_SANITY_PROJECT_ID is missing on env — sanity client will fail on fetch.`
+	);
+}
+
 export const sanity = createClient({
 	projectId: env.PUBLIC_SANITY_PROJECT_ID,
 	dataset: env.PUBLIC_SANITY_DATASET ?? 'production',

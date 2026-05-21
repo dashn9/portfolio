@@ -102,7 +102,7 @@
 			year: '2026',
 			thumb: 'thumb-f',
 			thumbLabel: 'path-findeR',
-			title: 'path-findeR',
+			title: 'PATH FINDER',
 			sub: 'Rust · Go · TS · extraction'
 		},
 		{

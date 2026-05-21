@@ -14,7 +14,7 @@
 			code: '// 002',
 			year: '2026',
 			thumb: 'thumb-d',
-			title: 'path-findeR',
+			title: 'PATH FINDER',
 			sub: 'Rust · Go · TS · extraction',
 			desc: 'Self-learning web page extraction service. Feed it a handful of pages from the same template and it returns a stable CSS selector manifest — LLM labels the meaningful zones, the pipeline derives and validates selectors across the corpus.',
 			stars: 0,

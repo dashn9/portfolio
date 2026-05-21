@@ -1,20 +1,9 @@
 import { createClient } from '@sanity/client';
-import { env } from '$env/dynamic/public';
-
-const where = typeof window === 'undefined' ? 'server' : 'browser';
-if (!env) {
-	console.warn(
-		`[sanity:${where}] env from $env/dynamic/public is undefined — runtime public vars are not available here.`
-	);
-} else if (!env.PUBLIC_SANITY_PROJECT_ID) {
-	console.warn(
-		`[sanity:${where}] PUBLIC_SANITY_PROJECT_ID is missing on env — sanity client will fail on fetch.`
-	);
-}
+import type { PortableTextBlock } from '@portabletext/types';
 
 export const sanity = createClient({
-	projectId: env.PUBLIC_SANITY_PROJECT_ID,
-	dataset: env.PUBLIC_SANITY_DATASET ?? 'production',
+	projectId: '3jcuipyy',
+	dataset: 'production',
 	apiVersion: '2026-01-01',
 	useCdn: true
 });
@@ -31,7 +20,7 @@ export type Post = {
 	cat: string;
 	tags?: string[];
 	time: string;
-	body?: unknown[];
+	body?: PortableTextBlock[];
 };
 
 const WORDS_PER_MINUTE = 220;
@@ -48,11 +37,14 @@ function readTimeFromText(text: string): string {
 	return `${mins} MIN`;
 }
 
-function extractText(body: unknown[]): string {
+type BlockChild = { text?: string };
+type BlockLike = { _type: string; children?: BlockChild[] };
+
+function extractText(body: PortableTextBlock[] | undefined): string {
 	if (!body?.length) return '';
-	return (body as Array<{ _type: string; children?: Array<{ text: string }> }>)
+	return (body as unknown as BlockLike[])
 		.filter((b) => b._type === 'block')
-		.map((b) => b.children?.map((c) => c.text).join('') ?? '')
+		.map((b) => b.children?.map((c) => c.text ?? '').join('') ?? '')
 		.join(' ');
 }
 
@@ -113,7 +105,7 @@ export async function getPost(slug: string): Promise<Post | null> {
 		desc: string;
 		cat: string;
 		tags?: string[];
-		body: unknown[];
+		body: PortableTextBlock[];
 	} | null>(
 		`*[_type == "post" && slug.current == $slug][0] {
 			_id,

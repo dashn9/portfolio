@@ -1,8 +1,9 @@
 <script lang="ts">
 	import NewsletterForm from '$lib/components/NewsletterForm.svelte';
 	import type { Post } from '$lib/sanity';
+	import type { PageData } from './$types';
 
-	let { data } = $props();
+	let { data }: { data: PageData } = $props();
 	const posts: Post[] = $derived(data.posts);
 
 	const catToolbar = ['ALL', 'ESSAY', 'NOTES', 'LETTER', 'IDEA', 'THOUGHTS'];

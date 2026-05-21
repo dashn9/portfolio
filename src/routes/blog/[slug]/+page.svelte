@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { PortableText } from '@portabletext/svelte';
-	let { data } = $props();
+	import type { PageData } from './$types';
+
+	let { data }: { data: PageData } = $props();
 	const { post } = data;
 </script>
 

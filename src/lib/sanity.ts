@@ -1,9 +1,10 @@
 import { createClient } from '@sanity/client';
+import { env } from '$env/dynamic/public';
 import type { PortableTextBlock } from '@portabletext/types';
 
 export const sanity = createClient({
-	projectId: '3jcuipyy',
-	dataset: 'production',
+	projectId: env.PUBLIC_SANITY_PROJECT_ID,
+	dataset: env.PUBLIC_SANITY_DATASET ?? 'production',
 	apiVersion: '2026-01-01',
 	useCdn: true
 });

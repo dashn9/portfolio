@@ -36,6 +36,7 @@
 	},
 	"dependencies": {
 		"@portabletext/svelte": "^3.0.1",
-		"@sanity/client": "^7.22.0"
+		"@sanity/client": "^7.22.0",
+		"@sveltejs/adapter-vercel": "^6.3.3"
 	}
 }

@@ -105,6 +105,14 @@
 
 <svelte:head>
 	<title>Daniel Shogbon — Work</title>
+	<meta
+		name="description"
+		content="Selected work by Daniel Shogbon, including Rusty Browser, Path Finder, Rustenium, browser automation tools, AI/ML systems, and quantitative trading experiments."
+	/>
+	<meta
+		name="keywords"
+		content="Daniel Shogbon work, dashn9 projects, Rusty Browser, Path Finder, Rustenium, browser automation, WebDriver BiDi, CDP, web extraction, AI, machine learning, quantitative trading, quant trading, Rust projects"
+	/>
 </svelte:head>
 
 <!-- CURRENTLY -->

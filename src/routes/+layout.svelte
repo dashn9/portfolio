@@ -34,7 +34,7 @@
 					D<span class="text-accent">.</span>SHOGBON
 				</div>
 				<div class="font-pixel text-[9px] uppercase tracking-[0.12em] text-ink-4">
-					// FIELD NOTES FROM A SMALL STUDIO · EST. 2026
+					// CODE · MATH · MARKETS · LIFE NOTES
 				</div>
 			</div>
 			<div class="flex gap-1">
@@ -46,7 +46,7 @@
 		<div
 			class="flex items-center gap-2 px-3.5 py-2 font-pixel text-[9px] uppercase tracking-[0.12em] text-ink"
 		>
-			<span class="inline-block size-2 bg-accent"></span> BUILDING RUSTYBROWSER.COM
+			<span class="inline-block size-2 bg-accent"></span> PUSHING INTELLIGENT AUTOMATION
 			<button
 				type="button"
 				onclick={() => theme.toggle()}

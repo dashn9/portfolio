@@ -62,6 +62,14 @@
 
 <svelte:head>
 	<title>Daniel Shogbon — Contact</title>
+	<meta
+		name="description"
+		content="Contact Daniel Shogbon for conversations around Rust, browser automation, distributed systems, AI/ML, quantitative trading, and software projects."
+	/>
+	<meta
+		name="keywords"
+		content="contact Daniel Shogbon, dashn9 contact, Rust developer contact, browser automation, distributed systems, AI, machine learning, quantitative trading, quant trading, software collaboration"
+	/>
 </svelte:head>
 
 <!-- HEADER -->

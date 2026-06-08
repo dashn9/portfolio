@@ -8,6 +8,7 @@
 
 <svelte:head>
 	<title>Daniel Shogbon — {post.title}{post.titleEm ?? ''}</title>
+	<meta name="description" content={post.desc} />
 </svelte:head>
 
 <article class="shadow-block-lg border-2 border-ink bg-paper-lite">

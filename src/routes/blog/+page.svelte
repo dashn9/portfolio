@@ -47,6 +47,14 @@
 
 <svelte:head>
 	<title>Daniel Shogbon — Writing</title>
+	<meta
+		name="description"
+		content="Writing and notes by Daniel Shogbon on code, Rust automation, AI/ML, quantitative trading, personal life, ideas, and observations."
+	/>
+	<meta
+		name="keywords"
+		content="Daniel Shogbon writing, dashn9 blog, personal notes, life notes, Rust, browser automation, AI, machine learning, AI/ML, quantitative trading, quant trading, software essays, technical notes"
+	/>
 </svelte:head>
 
 <!-- HEADER -->

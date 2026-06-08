@@ -1,5 +1,13 @@
 <svelte:head>
 	<title>Daniel Shogbon — About</title>
+	<meta
+		name="description"
+		content="About Daniel Shogbon: software engineer working across systems languages, browser automation, AI/ML systems, mathematics, quantitative financial models, writing, and personal life notes."
+	/>
+	<meta
+		name="keywords"
+		content="Daniel Shogbon, dashn9, about Daniel Shogbon, Rust developer, Go developer, Python developer, Svelte, Next.js, Kubernetes, browsers, browser automation, AI, machine learning, AI/ML, mathematics, quantitative financial models, quantitative trading, personal events, life notes, software engineer"
+	/>
 </svelte:head>
 
 <section
@@ -27,7 +35,7 @@
 				class="text-accent no-underline hover:underline">Rusty Browser</a
 			>, a distributed AI-driven browser automation cluster.
 			<br /><br />
-			Started in 2017 with a PHP site. Now I write Rust that talks to browsers at the protocol layer.
+			Started in 2017 with a PHP site. Now the work moves between browsers, systems code, mathematics, markets, and personal notes.
 		</p>
 		<div class="mt-6 flex flex-wrap gap-2.5">
 			<a
@@ -58,7 +66,7 @@
 			// STACK.LOG
 		</div>
 		<div class="bg-dot-ink p-[22px]">
-			{#each [['RUST', 'AUTOMATION · SYSTEMS'], ['SVELTE 5', 'FRONTEND · PRIMARY'], ['NEXT.JS', 'FRONTEND · SECOND'], ['GO', 'BACKEND · INFRA'], ['PYTHON', 'AUTOMATION · BOTS'], ['KUBERNETES', 'DEPLOYMENT']] as [lang, note] (lang)}
+			{#each [['RUST', 'AUTOMATION · SYSTEMS'], ['SVELTE 5', 'FRONTEND · PRIMARY'], ['NEXT.JS', 'FRONTEND · SECOND'], ['GO', 'BACKEND · INFRA'], ['PYTHON', 'AUTOMATION · BOTS'], ['KUBERNETES', 'DEPLOYMENT'], ['BROWSERS', 'PROTOCOLS · AUTOMATION'], ['AI/ML', 'EXTRACTION · EVALUATION'], ['MATHEMATICS', 'PROBABILITY · MARKETS'], ['QUANT', 'FINANCIAL MODELS']] as [lang, note] (lang)}
 				<div
 					class="flex justify-between border-b border-dashed border-paper-edge py-2.5 font-pixel text-[10px] uppercase tracking-[0.12em] last:border-b-0"
 				>

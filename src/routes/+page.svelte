@@ -140,12 +140,12 @@
 	];
 
 	const nowList = [
-		{ n: '/01', body: 'Pushing WebDriver BiDi multi-session handling in <em>rustenium</em> v2.', cat: 'RUST' },
-		{ n: '/02', body: 'Reading <em>Programming Rust</em> (Blandy) — for the second pass.', cat: 'READING' },
-		{ n: '/03', body: 'Wiring a WASM compilation target for the browser automation core.', cat: 'WASM' },
-		{ n: '/04', body: 'Hardening Kubernetes node affinity rules in <em>bot-deploy</em>.', cat: 'INFRA' },
-		{ n: '/05', body: 'Listening to a lot of Burial lately — good for long compile waits.', cat: 'MUSIC' },
-		{ n: '/06', body: 'Upstream fix in <em>chromiumoxide</em> for session leak on hard crash.', cat: 'OSS' }
+		{ n: '/01', body: 'Pushing the bounds of intelligent automation through browser systems and extraction loops.', cat: 'WORK' },
+		{ n: '/02', body: 'Reading mathematics around probability, systems, markets, and model intuition.', cat: 'READING' },
+		{ n: '/03', body: 'Working through proofs, diagrams, and notebooks until the ideas become usable.', cat: 'MATH' },
+		{ n: '/04', body: 'Backtesting small quantitative financial models before turning them into code.', cat: 'QUANT' },
+		{ n: '/05', body: 'Writing personal notes around personal events, routines, and attention.', cat: 'LIFE' },
+		{ n: '/06', body: 'OSS experiments around systems languages like Rust, automation libraries, and quantitative financial models.', cat: 'OSS' }
 	];
 
 	const yearsBar = ['on', 'on', 'on', 'on', 'on', 'on', 'on', 'on', '', ''];
@@ -162,6 +162,14 @@
 
 <svelte:head>
 	<title>Daniel Shogbon — Index</title>
+	<meta
+		name="description"
+		content="Daniel Shogbon's portfolio for Rust automation, browser tooling, web extraction, AI/ML, mathematics, quantitative trading, systems projects, writing, and personal life notes."
+	/>
+	<meta
+		name="keywords"
+		content="Daniel Shogbon, dashn9, Rust developer, browser automation, WebDriver BiDi, CDP, web extraction, path-finder, Rustenium, systems programming, AI, machine learning, AI/ML, mathematics, quantitative trading, quant trading, personal notes, life notes, portfolio"
+	/>
 </svelte:head>
 
 <!-- HERO -->
@@ -188,7 +196,7 @@
 		</h1>
 		<p class="max-w-[50ch] font-mono text-[15px] leading-[1.6] text-ink-2">
 			Hi, I'm <mark>Daniel Shogbon</mark> — A quite tinkerer of symbols that births magic.<br/><br/>
-			Living in the domain of code and self. Eight years in, mostly from a room with fifteen windows, lots of sunlight and a dell keyboard.
+			Living in the domain of code and self. Eight years in, circling intelligent automation, mathematics, AI/ML, quantitative financial models, and personal events from a room with fifteen windows, lots of sunlight and a dell keyboard.
 		</p>
 		<div class="mt-6 flex flex-wrap gap-2.5">
 			<a
@@ -391,8 +399,8 @@
 			Writing things <em>down.</em>
 		</h2>
 		<p class="m-0 max-w-[48ch] font-mono text-[14px] leading-[1.55] text-paper">
-			Things worth writing down. Code, ideas, observations, the occasional detour — with a
-			particular lean toward automation and how machines interact with the web. Started January 2026.
+			Things worth writing down. Code, mathematics, AI/ML, personal events, and the occasional detour — with a
+			particular lean toward automation, markets, and how machines interact with the web. Started January 2026.
 			No tracking, no ads.
 		</p>
 	</div>

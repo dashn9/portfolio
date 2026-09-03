@@ -111,7 +111,7 @@
 			</h5>
 			<a href="https://github.com/dashn9" class="block py-px text-paper no-underline hover:text-accent">Github ↗</a>
 			<a href="https://x.com/" class="block py-px text-paper no-underline hover:text-accent">X ↗</a>
-			<a href="/cv/DanielShogbon_resume_20260513.pdf" target="_blank" rel="noopener noreferrer" class="block py-px text-paper no-underline hover:text-accent">Résumé ↗</a>
+			<a href="/cv/DanielShogbon_resume_20260903.pdf" target="_blank" rel="noopener noreferrer" class="block py-px text-paper no-underline hover:text-accent">Résumé ↗</a>
 		</div>
 		<div class="p-4 font-pixel text-[10px] uppercase leading-[1.7] tracking-[0.08em] text-ink-4">
 			<h5 class="mb-2.5 font-pixel text-[10px] uppercase tracking-[0.14em] text-paper">

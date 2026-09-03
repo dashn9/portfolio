@@ -46,7 +46,7 @@
 				>SEND A NOTE</a
 			>
 			<a
-				href="/cv/DanielShogbon_resume_20260513.pdf"
+				href="/cv/DanielShogbon_resume_20260903.pdf"
 				target="_blank"
 				rel="noopener noreferrer"
 				class="press-block shadow-block-sm border-2 border-ink bg-paper-lite px-[18px] py-[11px] font-pixel text-[11px] uppercase tracking-[0.1em] text-ink no-underline hover:press-block-on hover:bg-ink hover:text-paper"

@@ -24,16 +24,11 @@
 			Daniel <em>Shogbon.</em>
 		</h1>
 		<p class="max-w-[50ch] font-mono text-[15px] leading-[1.6] text-ink-2">
-			Software engineer. Eight years across Rust, Go, Python, and JavaScript.
+			Software engineer. Nine years across Rust, Go, Python, and JavaScript.
 			<br /><br />
 			I build things that move fast and stay hidden — browser automation, stealth systems, distributed
-			infrastructure. Currently shipping
-			<a
-				href="https://rustybrowser.com"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="text-accent no-underline hover:underline">Rusty Browser</a
-			>, a distributed AI-driven browser automation cluster.
+			infrastructure. Currently shipping <span class="text-accent">Neurun</span> and
+			<span class="text-accent">Loci</span> — details are private for now.
 			<br /><br />
 			Started in 2017 with a PHP site. Now the work moves between browsers, systems code, mathematics, markets, and personal notes.
 		</p>

@@ -41,6 +41,15 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'hidden',
+      title: 'Hidden',
+      type: 'boolean',
+      initialValue: false,
+      description:
+        'Hide this post from the site: it drops out of the writing index and its URL returns 404. Existing posts without this field stay visible.',
+      options: {layout: 'switch'},
+    }),
+    defineField({
       name: 'cat',
       title: 'Category',
       type: 'string',
@@ -88,11 +97,14 @@ export default defineType({
       titleEm: 'titleEm',
       date: 'publishedAt',
       cat: 'cat',
+      hidden: 'hidden',
     },
-    prepare({title, titleEm, date, cat}) {
+    prepare({title, titleEm, date, cat, hidden}) {
       return {
-        title: title + (titleEm ? ` ${titleEm}` : ''),
-        subtitle: [cat, date?.slice(0, 10)].filter(Boolean).join(' · '),
+        title: (hidden ? '🔒 ' : '') + title + (titleEm ? ` ${titleEm}` : ''),
+        subtitle: [hidden ? 'HIDDEN' : null, cat, date?.slice(0, 10)]
+          .filter(Boolean)
+          .join(' · '),
       }
     },
   },

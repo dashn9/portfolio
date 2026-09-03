@@ -47,11 +47,11 @@
 	const faqs = [
 		{
 			q: 'What are you working on?',
-			a: 'Full-time on Rusty Browser — a distributed, AI-driven browser automation cluster in Rust. Visit rustybrowser.com for the latest.'
+			a: 'Full-time on Neurun and Loci. Details are private for now — more when there is something worth showing.'
 		},
 		{
 			q: 'Are you open to collaboration?',
-			a: 'Yes, especially around browser automation and Rust tooling. Open a GitHub issue or email me directly.'
+			a: 'Yes, especially around automation and Rust and Go tooling. Open a GitHub issue or email me directly.'
 		},
 		{
 			q: 'What is the best way to reach you?',
@@ -85,13 +85,8 @@
 			Send a note, <em>hear back.</em>
 		</h1>
 		<p class="max-w-[52ch] font-mono text-[15px] leading-[1.6] text-ink-2">
-			Currently heads-down on
-			<a
-				href="https://rustybrowser.com"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="text-accent no-underline hover:underline">Rusty Browser</a
-			>. but always open to conversations about browser
+			Currently heads-down on <span class="text-accent">Neurun</span> and
+			<span class="text-accent">Loci</span>. but always open to conversations about browser
 			automation, Rust, golang or distributed systems.
 			<br /><br />
 			Response time is usually within 48 hours.

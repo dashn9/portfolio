@@ -34,7 +34,7 @@
 					D<span class="text-accent">.</span>SHOGBON
 				</div>
 				<div class="font-pixel text-[9px] uppercase tracking-[0.12em] text-ink-4">
-					// CODE · MATH · MARKETS · LIFE NOTES
+					// CODE · SYSTEMS . MATH · LIFE NOTES
 				</div>
 			</div>
 			<div class="flex gap-1">
@@ -119,8 +119,7 @@
 			</h5>
 			DM Serif Display<br />
 			Silkscreen<br />
-			JetBrains Mono<br />
-			No analytics · 76kb
+			JetBrains Mono
 		</div>
 	</footer>
 

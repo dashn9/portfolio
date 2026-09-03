@@ -66,7 +66,7 @@ export async function getPosts(): Promise<Post[]> {
 		tags?: string[];
 		bodyChars: number;
 	}>>(
-		`*[_type == "post"] | order(publishedAt desc) {
+		`*[_type == "post" && hidden != true] | order(publishedAt desc) {
 			_id,
 			"slug": slug.current,
 			"date": publishedAt,
@@ -108,7 +108,7 @@ export async function getPost(slug: string): Promise<Post | null> {
 		tags?: string[];
 		body: PortableTextBlock[];
 	} | null>(
-		`*[_type == "post" && slug.current == $slug][0] {
+		`*[_type == "post" && slug.current == $slug && hidden != true][0] {
 			_id,
 			"slug": slug.current,
 			"date": publishedAt,

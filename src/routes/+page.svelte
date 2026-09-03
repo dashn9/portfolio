@@ -9,6 +9,7 @@
 		thumbLabel: string;
 		title: string;
 		sub: string;
+		url?: string;
 	};
 
 	type Commit = {
@@ -91,11 +92,12 @@
 	const projects: Project[] = [
 		{
 			code: '// WORK/001',
-			year: '2025',
+			year: '2026',
 			thumb: 'thumb-a',
 			thumbLabel: 'rusty-browser',
 			title: 'RUSTY BROWSER',
-			sub: 'Rust · distributed · stealth cluster'
+			sub: 'Rust · distributed · stealth cluster',
+			url: 'https://rustybrowser.com'
 		},
 		{
 			code: '// WORK/002',
@@ -140,15 +142,16 @@
 	];
 
 	const nowList = [
-		{ n: '/01', body: 'Pushing the bounds of intelligent automation through browser systems and extraction loops.', cat: 'WORK' },
-		{ n: '/02', body: 'Reading mathematics around probability, systems, markets, and model intuition.', cat: 'READING' },
-		{ n: '/03', body: 'Working through proofs, diagrams, and notebooks until the ideas become usable.', cat: 'MATH' },
-		{ n: '/04', body: 'Backtesting small quantitative financial models before turning them into code.', cat: 'QUANT' },
-		{ n: '/05', body: 'Writing personal notes around personal events, routines, and attention.', cat: 'LIFE' },
-		{ n: '/06', body: 'OSS experiments around systems languages like Rust, automation libraries, and quantitative financial models.', cat: 'OSS' }
+		{ n: '/01', body: 'Pushing the bounds of intelligent automation through systems and extraction loops.<br>(Psst, Sometimes I duct tape them just to move fast :-)', cat: 'WORK' },
+		{ n: '/02', body: 'Reading <em>Programming Rust and Golang</em> -- S+ Tier languages', cat: 'READING' },
+		{ n: '/03', body: 'Currently reading <em>1984</em> by <em>George Orwell</em>', cat: 'READING' },
+		{ n: '/05', body: 'Writing personal notes around personal events, routines, and tinkering with ideas.', cat: 'LIFE' },
+		{ n: '/06', body: 'OSS experiments around systems languages like Rust, Go, automation libraries', cat: 'OSS' },
+		{ n: '/07', body: 'Playing with Quantitative Finance, currently learning Statistics, moving to Linear Algebra and Calculus next year', cat: 'MATH' },
+		{ n: '/08', body: '26 now, Looking to become a farmer in my mid to late 30s.', cat: 'LIFE' }
 	];
 
-	const yearsBar = ['on', 'on', 'on', 'on', 'on', 'on', 'on', 'on', '', ''];
+	const yearsBar = ['on', 'on', 'on', 'on', 'on', 'on', 'on', 'on', 'on', ''];
 	const projectsBar = ['hot', 'hot', 'hot', 'on', 'on', 'on', 'on', 'on', '', ''];
 	const starsBar = ['hot', 'hot', 'on', 'on', 'on', 'on', 'on', 'on', '', ''];
 
@@ -196,7 +199,7 @@
 		</h1>
 		<p class="max-w-[50ch] font-mono text-[15px] leading-[1.6] text-ink-2">
 			Hi, I'm <mark>Daniel Shogbon</mark> — A quite tinkerer of symbols that births magic.<br/><br/>
-			Living in the domain of code and self. Eight years in, circling intelligent automation, mathematics, AI/ML, quantitative financial models, and personal events from a room with fifteen windows, lots of sunlight and a dell keyboard.
+			Living in the domain of code and self. Nine years in, mostly from a room with fifteen windows, lots of sunlight and a dell keyboard.
 		</p>
 		<div class="mt-6 flex flex-wrap gap-2.5">
 			<a
@@ -225,16 +228,16 @@
 		<div class="bg-dot-ink flex flex-col gap-[18px] p-[22px]">
 			<div class="font-pixel">
 				<div class="text-[9px] uppercase tracking-[0.14em] opacity-70">» CURRENT</div>
-				<div class="mt-1.5 text-[16px] uppercase tracking-[0.04em] text-accent"><a href="https://github.com/dashn9/rusty-browser">Building Rusty Browser</a></div>
+				<div class="mt-1.5 text-[16px] uppercase tracking-[0.04em] text-accent">Building Neurun &amp; Loci</div>
 				<div class="mt-1.5 text-[11px] uppercase tracking-[0.04em] text-paper opacity-85">
-					FROM NOV 2026 - Launch APR 28
+					DETAILS PRIVATE FOR NOW
 				</div>
 			</div>
 			<pre
 				class="m-0 whitespace-pre border border-dashed border-paper-edge p-2.5 font-mono text-[11px] leading-[1.15] text-paper">╔═══════════════╗
 ║ <span class="text-accent">▓▓▓▓▓▓▓░░░</span>    ║
-║ RUSTY BROWSER ║
-║ TILL INFINI   ║
+║ NEURUN · LOCI ║
+║ PRIVATE BUILD ║
 ╚═══════════════╝</pre>
 			<div class="font-pixel">
 				<div class="flex items-baseline justify-between">
@@ -279,7 +282,7 @@
 		<div
 			class="flex justify-between border-t-2 border-paper-edge px-3.5 py-3 font-pixel text-[9px] uppercase tracking-[0.14em] text-ink-4"
 		>
-			<span>UPTIME · 8Y 4M</span><span>WX · 7°C RAIN</span>
+		Hello
 		</div>
 	</div>
 </section>
@@ -337,9 +340,9 @@
 			</div>
 		{/snippet}
 
-		{@render stat('YEARS CODING', '08', yearsBar)}
+		{@render stat('YEARS CODING', '09', yearsBar)}
 		{@render stat('REPOS SHIPPED', '52', projectsBar)}
-		{@render stat('GITHUB STARS', '28', starsBar)}
+		{@render stat('GITHUB STARS', '40', starsBar)}
 	</div>
 </section>
 
@@ -360,7 +363,9 @@
 	<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
 		{#each projects as p (p.code)}
 			<a
-				href="/work"
+				href={p.url ?? '/work'}
+				target={p.url ? '_blank' : undefined}
+				rel={p.url ? 'noopener noreferrer' : undefined}
 				class="press-block shadow-block-md flex flex-col border-2 border-ink bg-paper-lite text-inherit no-underline hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-block-accent-sm"
 			>
 				<div
@@ -399,8 +404,8 @@
 			Writing things <em>down.</em>
 		</h2>
 		<p class="m-0 max-w-[48ch] font-mono text-[14px] leading-[1.55] text-paper">
-			Things worth writing down. Code, mathematics, AI/ML, personal events, and the occasional detour — with a
-			particular lean toward automation, markets, and how machines interact with the web. Started January 2026.
+			Things worth writing down. Code, ideas, observations, the occasional detour — with a
+			particular lean toward automation and how machines interact with the web. Started January 2026.
 			No tracking, no ads.
 		</p>
 	</div>

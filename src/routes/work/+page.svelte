@@ -2,12 +2,12 @@
 	const projects = [
 		{
 			code: '// 001',
-			year: '2025',
+			year: '2026',
 			thumb: 'thumb-a',
 			title: 'RUSTY BROWSER',
 			sub: 'Rust · distributed · stealth cluster',
 			desc: 'Distributed, AI-driven browser automation cluster built in Rust. Orchestrates headless Chromium instances across nodes with stealth fingerprinting, session pooling, and fault-tolerant task routing.',
-			stars: 6,
+			stars: 9,
 			url: 'https://rustybrowser.com'
 		},
 		{
@@ -17,7 +17,7 @@
 			title: 'PATH FINDER',
 			sub: 'Rust · Go · TS · extraction',
 			desc: 'Self-learning web page extraction service. Feed it a handful of pages from the same template and it returns a stable CSS selector manifest — LLM labels the meaningful zones, the pipeline derives and validates selectors across the corpus.',
-			stars: 0,
+			stars: 1,
 			url: 'https://github.com/dashn9/path-findeR'
 		},
 		{
@@ -27,7 +27,7 @@
 			title: 'RUSTENIUM',
 			sub: 'Rust · WebDriver BiDi · CDP',
 			desc: 'Native Rust engine for the WebDriver BiDi Protocol and Chrome DevTools Protocol. Async-first, zero Node.js dependency, full protocol coverage.',
-			stars: 18,
+			stars: 25,
 			url: 'https://github.com/dashn9/rustenium'
 		},
 		{
@@ -130,22 +130,20 @@
 		<h1
 			class="mb-4 font-serif text-[clamp(44px,6.5vw,80px)] font-normal leading-none tracking-[-0.025em] text-ink [&_em]:italic [&_em]:text-ink-3"
 		>
-			Rusty <em>Browser.</em>
+			Neurun <em>&amp; Loci.</em>
 		</h1>
 		<p class="max-w-[50ch] font-mono text-[15px] leading-[1.6] text-ink-2">
-			A distributed, AI-driven browser automation cluster in Rust. Stealth fingerprinting, session
-			pooling, and fault-tolerant task routing across headless Chromium nodes.
+			Two builds in progress. Details are private for now — more when there is something worth
+			showing.
 		</p>
 		<div class="mt-6 flex flex-wrap gap-2.5">
 			<a
-				href="https://rustybrowser.com"
-				target="_blank"
-				rel="noopener noreferrer"
+				href="/contact"
 				class="press-block shadow-block-sm border-2 border-ink bg-accent px-[18px] py-[11px] font-pixel text-[11px] uppercase tracking-[0.1em] text-paper no-underline hover:press-block-on hover:bg-ink"
-				>RUSTYBROWSER.COM →</a
+				>SEND A NOTE →</a
 			>
 			<a
-				href="https://github.com/dashn9/rusty-browser"
+				href="https://github.com/dashn9"
 				target="_blank"
 				rel="noopener noreferrer"
 				class="press-block shadow-block-sm border-2 border-ink bg-paper-lite px-[18px] py-[11px] font-pixel text-[11px] uppercase tracking-[0.1em] text-ink no-underline hover:press-block-on hover:bg-ink hover:text-paper"
@@ -163,26 +161,26 @@
 			<div class="font-pixel">
 				<div class="text-[9px] uppercase tracking-[0.14em] opacity-70">» STACK</div>
 				<div class="mt-1.5 text-[14px] uppercase tracking-[0.04em] text-accent">
-					RUST · WEBDRIVER BIDI · CDP
+					RUST · GO · WEBDRIVER BIDI · CDP
 				</div>
 			</div>
 			<pre
 				class="m-0 whitespace-pre border border-dashed border-paper-edge p-2.5 font-mono text-[11px] leading-[1.15] text-paper">╔═══════════════╗
 ║ <span class="text-accent">▓▓▓▓▓▓▓░░░</span>    ║
-║ RUSTY BROWSER ║
+║ NEURUN · LOCI ║
 ║ TILL INFINI   ║
 ╚═══════════════╝</pre>
 			<div class="font-pixel">
 				<div class="text-[9px] uppercase tracking-[0.14em] opacity-70">» SITE</div>
 				<div class="mt-1.5 text-[14px] uppercase tracking-[0.04em] text-paper">
-					RUSTYBROWSER.COM
+					PRIVATE FOR NOW
 				</div>
 			</div>
 		</div>
 		<div
 			class="flex justify-between border-t-2 border-paper-edge px-3.5 py-3 font-pixel text-[9px] uppercase tracking-[0.14em] text-ink-4"
 		>
-			<span>RUST · OPEN SOURCE</span><span>6 ★ ON GITHUB</span>
+			<span>RUST · GO · PRIVATE</span><span>IN PROGRESS</span>
 		</div>
 	</div>
 </section>
